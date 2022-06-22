@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Footballer>
+
+<form method="post" asp-action="Index">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Players</h2>
+            <hr />
+        </div>
+        @if (Model != null)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">E-Mail</th>
+                    </tr>
+                    @foreach (var footballer in Model)
+                    {
+                    <thead class="">
+                        <tr class="col-sm-6">
+                            <input asp-for=@footballer.Id hidden>
+                            <th scope="row">@footballer.Id</th>
+                            <td>@footballer.Name</td>
+                            <td>@footballer.Surname</td>
+                            <td>@footballer.Age</td>
+                            <td>@footballer.Email</td>
+                            <td><a asp-controller="Footballer" asp-action="Edit" asp-route-id=@footballer.Id class="btn btn-outline-info mx-2"> <i class="bi bi-pencil-square"></i>Edit</a></td>
+                            <td><button type="submit" class="btn btn-outline-danger" style="width:150px">delete</button></td>
+                        </tr>
+                    </thead>
+                    }
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        }
+        <a asp-controller="Footballer" asp-action="Insert" class="btn btn-outline-primary" style="width:200px">
+            Add Player
+        </a>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-warning" style="width:200px">
+            Go To Homepage
+        </a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    }
